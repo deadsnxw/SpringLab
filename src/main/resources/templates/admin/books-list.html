@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Panel - Books</title>
+</head>
+<body>
+<h1>Admin Panel - Books</h1>
+
+<a th:href="@{/books/admin/add}">Add New Book</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Keywords</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.title}"></td>
+        <td th:text="${book.author}"></td>
+        <td th:text="${book.keywords}"></td>
+        <td>
+            <a th:href="@{/books/admin/edit(id=${book.id})}">Edit</a>
+            <a th:href="@{/books/admin/delete(id=${book.id})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

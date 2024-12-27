@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Library Catalog</title>
+</head>
+<body>
+<h1>Library Catalog</h1>
+
+<form method="get" th:action="@{/books/}">
+    <input type="text" name="query" th:value="${query ?: ''}" placeholder="Search...">
+    <select name="searchType">
+        <option value="author" th:selected="${searchType == 'author'}">Author</option>
+        <option value="title" th:selected="${searchType == 'title'}">Title</option>
+        <option value="keywords" th:selected="${searchType == 'keywords'}">Keywords</option>
+    </select>
+    <button type="submit">Search</button>
+</form>
+
+<p th:if="${books.isEmpty()}">No books found for your search.</p>
+<p th:unless="${books.isEmpty()}">Books found:</p>
+
+<table>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Keywords</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.title}"></td>
+        <td th:text="${book.author}"></td>
+        <td>
+            <span th:if="${#lists.isEmpty(book.keywords)}">No keywords</span>
+            <ul>
+                <li th:each="keyword : ${book.keywords}">
+                    <span th:text="${keyword}"></span>
+                </li>
+            </ul>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
