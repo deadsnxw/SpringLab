@@ -1,13 +1,20 @@
 package org.example.laboratory.model;
 
-import lombok.Data;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 
 public class Book {
+    @NotNull
     private Long id;
+
+    @NotNull
     private String title;
+
+    @NotNull
     private String author;
+
+    @NotNull
     private List<String> keywords;
 
     public Long getId() {
